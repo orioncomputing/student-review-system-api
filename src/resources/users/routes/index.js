@@ -9,9 +9,11 @@
 
   // Import routes
   const getUsers = require("./getUsers");
+  const setup = require("./setup");
 
   // Export routes
   module.exports = {
-    getUsers
+    getUsers,
+    setup
   };
 })();

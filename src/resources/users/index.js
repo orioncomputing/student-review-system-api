@@ -19,6 +19,7 @@
 
   // Create routes
   router.get(base, routes.getUsers);
+  router.post(`${base}/setup`, routes.setup);
 
   // Export router
   module.exports = router;
