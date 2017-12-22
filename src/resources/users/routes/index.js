@@ -11,11 +11,13 @@
   const getUsers = require("./getUsers");
   const getUser = require("./getUser");
   const setup = require("./setup");
+  const authenticate = require("./authenticate");
 
   // Export routes
   module.exports = {
     getUsers,
     getUser,
-    setup
+    setup,
+    authenticate
   };
 })();
