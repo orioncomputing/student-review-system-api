@@ -10,6 +10,8 @@
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
-    "mongoose": "^4.12.4"
+    "mongoose": "^4.12.4",
+    "nodemailer": "^4.4.1",
+    "nodemailer-direct-transport": "^3.3.2"
   }
 }

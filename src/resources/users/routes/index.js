@@ -10,6 +10,7 @@
   // Import routes
   const getUsers = require("./getUsers");
   const getUser = require("./getUser");
+  const createUser = require("./createUser");
   const setup = require("./setup");
   const authenticate = require("./authenticate");
 
@@ -17,6 +18,7 @@
   module.exports = {
     getUsers,
     getUser,
+    createUser,
     setup,
     authenticate
   };

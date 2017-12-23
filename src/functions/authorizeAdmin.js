@@ -19,7 +19,7 @@
   // Create function
   const authorizeAdmin = async ctx => {
     // Grab token from header
-    const token = ctx.request.headers["Authorization"].split(" ")[1];
+    const token = ctx.request.headers["authorization"].split(" ")[1];
     if (!token) return false;
     // Verify JWT
     let decoded;
@@ -30,7 +30,9 @@
     }
     // Find user and check for admin privileges
     const user = await User.findOne({ email: decoded.email });
-    if (user.isAdmin) return true;
+    if (!user) return false;
+    if (user.isAdmin) return user;
+    return false;
   };
 
   module.exports = authorizeAdmin;

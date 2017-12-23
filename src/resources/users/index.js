@@ -20,8 +20,9 @@
   // Create routes
   router.get(base, routes.getUsers);
   router.get(`${base}/:email`, routes.getUser);
-  router.post(`${base}/setup`, routes.setup);
-  router.post(`${base}/authenticate`, routes.authenticate);
+  router.post(base, routes.createUser);
+  router.post(`/setup`, routes.setup);
+  router.post(`/authenticate`, routes.authenticate);
 
   // Export router
   module.exports = router;
