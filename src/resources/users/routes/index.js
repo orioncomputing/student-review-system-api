@@ -11,6 +11,7 @@
   const getUsers = require("./getUsers");
   const getUser = require("./getUser");
   const createUser = require("./createUser");
+  const patchUser = require("./patchUser");
   const setup = require("./setup");
   const authenticate = require("./authenticate");
 
@@ -19,6 +20,7 @@
     getUsers,
     getUser,
     createUser,
+    patchUser,
     setup,
     authenticate
   };

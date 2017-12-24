@@ -75,7 +75,6 @@
         }
         // Create a confirmation code
         const token = createConfirmationCode();
-        console.log(token);
         // Send an email
         sendEmail(
           ctx.request.body.email,
@@ -112,7 +111,6 @@
       }
     } catch (error) {
       // Send 500 error
-      console.log(error);
       ctx.response.status = 500;
       return (ctx.response.body = {
         success: false,

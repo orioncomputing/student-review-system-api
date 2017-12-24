@@ -21,6 +21,7 @@
   router.get(base, routes.getUsers);
   router.get(`${base}/:email`, routes.getUser);
   router.post(base, routes.createUser);
+  router.patch(`${base}/:uniqueId`, routes.patchUser);
   router.post(`/setup`, routes.setup);
   router.post(`/authenticate`, routes.authenticate);
 

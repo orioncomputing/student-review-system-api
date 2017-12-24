@@ -2,6 +2,8 @@
 
 This is the API for the Student Review System, a web system designed for peer review and self-evaluation for students in schools and universities.
 
+**This is an in-development piece of software and is not ready for real usage.**
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development purposes. See deployment for notes on how to deploy the project on a live system.
@@ -20,7 +22,7 @@ The server should automatically restart during development. In case of major cha
 
 ## Deployment
 
-Instructions for deployment on production systems are currently in development.
+Instructions for deployment on production systems are currently in development. The current suggestion is to note that the src/functions/sendEmail.js file does not actually send emails and instead logs messages to the console. These messages are in the proper format to be used by nodemailer to send email, and the application will need to be customized to send actual emails in real usage. The src/config.js file will also need to be customized to change any incorrect information.
 
 ## Built With
 

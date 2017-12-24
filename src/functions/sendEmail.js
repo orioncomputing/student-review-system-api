@@ -10,26 +10,15 @@
   // Import configuration
   const config = require("../config");
 
-  // Import nodemailer
-  const nodemailer = require("nodemailer");
-  const directTransport = require("nodemailer-direct-transport");
-
-  // Setup nodemailer
-  const transporter = nodemailer.createTransport(
-    directTransport({ name: config.emailConfig.hostname })
-  );
-
   const sendEmail = async (to, subject, message) => {
-    console.log(to, subject, message);
     try {
-      const message = {
+      const messageObject = {
         from: config.emailConfig.from,
         to: to,
         subject: subject,
         text: message
       };
-
-      await transporter.sendMail(message);
+      console.log(message);
       return true;
     } catch (err) {
       return err;

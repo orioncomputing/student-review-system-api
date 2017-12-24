@@ -29,6 +29,11 @@
         subject: "Set up your account on the Student Review System",
         message:
           "You've been invited by $invitername to set up an account on the Student Review System. If you believe this was a mistake, please ignore this email. To set up your account, follow this link: $link"
+      },
+      passwordReset: {
+        subject: "Reset your password on the Student Review System",
+        message:
+          "Someone requested to reset your password on the Student Review System. If this was a mistake or you did not request this password reset, please ignore this email. Your account is safe. Otherwise, to reset your password, follow this link: $link"
       }
     }
   };
