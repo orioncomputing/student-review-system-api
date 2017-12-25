@@ -28,6 +28,9 @@
   // Import moment for time manipulation
   const moment = require("moment");
 
+  // Import jwt
+  const jwt = require("jsonwebtoken");
+
   const patchUser = async ctx => {
     try {
       if (!ctx.request.body || !ctx.request.body.mode) {
@@ -164,6 +167,93 @@
           }
         });
       } else if (ctx.request.body.mode === "change-info") {
+        if (!ctx.request.headers["authorization"]) {
+          ctx.response.status = 400;
+          return (ctx.response.body = {
+            success: false,
+            message: "Authorization header required"
+          });
+        }
+        // Get user
+        const user = await User.findOne({
+          email: ctx.params.uniqueId
+        });
+        if (!user) {
+          ctx.response.status = 404;
+          return (ctx.response.body = {
+            success: false,
+            message: "The user you are trying to modify does not exist."
+          });
+        }
+        // Get token
+        const token = ctx.request.headers["authorization"].split(" ")[1];
+        if (!token) {
+          ctx.response.status = 400;
+          return (ctx.response.body = {
+            success: false,
+            message: "An authentication token is required."
+          });
+        }
+        // Verify JWT
+        let decoded;
+        try {
+          decoded = jwt.verify(token, config.secret);
+        } catch (error) {
+          ctx.response.status = 401;
+          return (ctx.response.body = {
+            success: false,
+            message: "Invalid token"
+          });
+        }
+        // Find authenticated user
+        const authUser = await User.findOne({ email: decoded.email });
+        if (!authUser) {
+          ctx.response.status = 401;
+          return (ctx.response.body = {
+            success: false,
+            message:
+              "The user you are trying to authenticate as does not exist."
+          });
+        }
+        const body = ctx.request.body;
+        if (user._id === authUser._id && body.hasOwnProperty("isAdmin")) {
+          ctx.response.status = 401;
+          return (ctx.response.body = {
+            success: false,
+            message: "You cannot change this property."
+          });
+        }
+        if (
+          authUser.isAdmin &&
+          (body.hasOwnProperty("name") ||
+            body.hasOwnProperty("email") ||
+            body.hasOwnProperty("password"))
+        ) {
+          ctx.response.status = 401;
+          return (ctx.response.body = {
+            success: false,
+            message: "You cannot change a property that you tried to change."
+          });
+        }
+        if (authUser.isAdmin) {
+          if (body.hasOwnProperty("isAdmin")) user.isAdmin = body.isAdmin;
+        } else if (String(user._id) === String(authUser._id)) {
+          if (body.hasOwnProperty("name")) user.name = body.name;
+          if (body.hasOwnProperty("email")) user.email = body.email;
+          if (body.hasOwnProperty("password"))
+            user.password = await bcrypt.hash(body.password, 10);
+        } else {
+          ctx.response.status = 401;
+          return (ctx.response.body = {
+            success: false,
+            message: "You are not authorized to modify this user."
+          });
+        }
+        await user.save();
+        ctx.response.status = 200;
+        return (ctx.response.body = {
+          success: true
+        });
       } else {
         ctx.response.status = 400;
         return (ctx.response.body = {

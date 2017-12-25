@@ -19,6 +19,7 @@
   // Create function
   const authorizeAdmin = async ctx => {
     // Grab token from header
+    if (!ctx.request.headers["authorization"]) return false;
     const token = ctx.request.headers["authorization"].split(" ")[1];
     if (!token) return false;
     // Verify JWT
