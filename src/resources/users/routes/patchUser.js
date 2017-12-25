@@ -222,8 +222,7 @@
             success: false,
             message: "You cannot change this property."
           });
-        }
-        if (
+        } else if (
           authUser.isAdmin &&
           (body.hasOwnProperty("name") ||
             body.hasOwnProperty("email") ||
@@ -235,13 +234,13 @@
             message: "You cannot change a property that you tried to change."
           });
         }
-        if (authUser.isAdmin) {
-          if (body.hasOwnProperty("isAdmin")) user.isAdmin = body.isAdmin;
-        } else if (String(user._id) === String(authUser._id)) {
+        if (String(user._id) === String(authUser._id)) {
           if (body.hasOwnProperty("name")) user.name = body.name;
           if (body.hasOwnProperty("email")) user.email = body.email;
           if (body.hasOwnProperty("password"))
             user.password = await bcrypt.hash(body.password, 10);
+        } else if (authUser.isAdmin) {
+          if (body.hasOwnProperty("isAdmin")) user.isAdmin = body.isAdmin;
         } else {
           ctx.response.status = 401;
           return (ctx.response.body = {
