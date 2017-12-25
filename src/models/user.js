@@ -11,7 +11,7 @@
   const mongoose = require("mongoose");
 
   // Create a model
-  const userModel = mongoose.model("User", {
+  const User = mongoose.model("User", {
     email: String,
     password: String,
     // User's name (display name)
@@ -21,8 +21,9 @@
     passwordResetToken: String,
     passwordResetExpires: Date,
     // For confirming emails during signup
-    confirmationToken: String
+    confirmationToken: String,
+    creationDate: { type: Date, default: Date.now }
   });
 
-  module.exports = userModel;
+  module.exports = User;
 })();
