@@ -20,6 +20,7 @@
 
   // Import resource controllers
   const users = require("./resources/users/index");
+  const classes = require("./resources/classes/index");
 
   // Create new Koa app
   const app = new Koa();
@@ -29,6 +30,7 @@
 
   // Use resource controllers
   app.use(users.routes());
+  app.use(classes.routes());
 
   // Connect to database
   mongoose.connect(config.dbString, { useMongoClient: true });
