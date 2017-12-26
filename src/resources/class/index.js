@@ -18,6 +18,7 @@
   const routes = require("./routes/index");
 
   // Create routes
+  router.get(base, routes.getClasses);
 
   // Export router
   module.exports = router;

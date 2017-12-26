@@ -8,8 +8,8 @@
   "use strict";
 
   // Import routes
-  require("../../../models/class");
+  const getClasses = require("./getClasses");
 
   // Export routes
-  module.exports = {};
+  module.exports = { getClasses };
 })();
