@@ -18,7 +18,7 @@
       const user = authedUser(ctx);
       const classes = Class.find({ owner: user._id })
         .exec()
-        .map(object => ({ title: object.title }));
+        .map(object => ({ title: object.title, id: object._id }));
       ctx.response.status = 200;
       return (ctx.response.body = {
         success: true,

@@ -7,6 +7,8 @@
 (function() {
   "use strict";
 
+  // TODO: Delete users
+
   // Import routes
   const getUsers = require("./getUsers");
   const getUser = require("./getUser");
