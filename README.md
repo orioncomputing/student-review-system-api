@@ -2,7 +2,7 @@
 
 This is the API for the Student Review System, a web system designed for peer review and self-evaluation for students in schools and universities.
 
-**This is an in-development piece of software and is not ready for real usage.**
+**This software has been scrapped. A new solution (which is not open source) is currently in development.**
 
 ## Getting Started
 
